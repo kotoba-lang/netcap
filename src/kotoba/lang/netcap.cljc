@@ -4,7 +4,8 @@
   only if granted net:tcp/net:udp/net:dns. The driver (socket-level) is
   host-injected (WASM premise). Consumes wit + coll. No third-party deps; .cljc."
   (:require [kotoba.lang.wit :as w]
-            [kotoba.lang.coll :as c]))
+            [kotoba.lang.coll :as c])
+  (:require [kotoba.netcap.net :as net-p]))
 
 (def ^:private surface-effects
   {:tcp  #{:connect :read :write :close}
@@ -19,14 +20,19 @@
 
 (defn surface-cap [s] (surface->cap s))
 
-(defprotocol INet
-  (connect  [net host port])
-  (read-net [net handle])
-  (write-net [net handle data])
-  (close-net [net handle])
-  (send-udp [net host port data])
-  (recv-udp [net handle timeout])
-  (resolve  [net hostname]))
+(def INet
+  "The protocol itself lives in one repo of its own now. This name is that
+  SAME protocol, not a second one: an implementation reified against either
+  is accepted by both (ADR-2609091900)."
+  net-p/Net)
+
+(def close-net net-p/close-net)
+(def connect net-p/connect)
+(def read-net net-p/read-net)
+(def recv-udp net-p/recv-udp)
+(def resolve net-p/resolve)
+(def send-udp net-p/send-udp)
+(def write-net net-p/write-net)
 
 (defn mock-net
   "An in-memory INet for tests."
