@@ -1,6 +1,28 @@
 {:paths ["src"]
  :version "0.1.0"
- :deps {io.github.kotoba-lang/wit  {:git/sha "5708fb98c9e25f233c5e44afe155328b29982cb2"}
+ :deps {
+        io.github.kotoba-lang/netcap-net
+        {:git/url "https://github.com/kotoba-lang/netcap-net.git"
+         :git/sha "fd8008183d55a2cdf0304694b42c44f58e4263c0"}
+        io.github.kotoba-lang/netcap-call
+        {:git/url "https://github.com/kotoba-lang/netcap-call.git"
+         :git/sha "daaae0fb8fb40e455b250f5257ecaa082b1a3850"}
+        io.github.kotoba-lang/netcap-discover
+        {:git/url "https://github.com/kotoba-lang/netcap-discover.git"
+         :git/sha "2f17ef8ebacd24389262777c80df875c37f88c37"}
+        io.github.kotoba-lang/netcap-make-net-manager
+        {:git/url "https://github.com/kotoba-lang/netcap-make-net-manager.git"
+         :git/sha "6f0da28e4936c3a2e0ab07181cc4261eb5a14c1a"}
+        io.github.kotoba-lang/netcap-mock-net
+        {:git/url "https://github.com/kotoba-lang/netcap-mock-net.git"
+         :git/sha "e71fd552bf9b0078a78e987705763c3dc30f86ba"}
+        io.github.kotoba-lang/netcap-surface-cap
+        {:git/url "https://github.com/kotoba-lang/netcap-surface-cap.git"
+         :git/sha "fdf4e70b43a1462a91356be56ef6865613cd788f"}
+        io.github.kotoba-lang/netcap-surfaces
+        {:git/url "https://github.com/kotoba-lang/netcap-surfaces.git"
+         :git/sha "d2f1dff156450eaff8d0010f2d1480f3068d6537"}
+io.github.kotoba-lang/wit  {:git/sha "5708fb98c9e25f233c5e44afe155328b29982cb2"}
         io.github.kotoba-lang/coll {:git/sha "9740cc2dc43a192077d77374b869a37940c801e4"}}
  :aliases
  {:test {:extra-paths ["test"]
