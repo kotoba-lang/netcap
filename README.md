@@ -9,5 +9,5 @@ the manager gates calls through policy.
 ## Test
 
 ```bash
-clojure -M:test
+kbb -M:test
 ```
