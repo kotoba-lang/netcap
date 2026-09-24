@@ -1,5 +1,5 @@
 (ns kotoba.lang.netcap-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [kotoba.lang.netcap :as net]
             [kotoba.lang.wit :as wit]))
 
