@@ -41,11 +41,13 @@
 (deftest node-loopback-cases
   #?(:cljs
      (async done
+       (let [servers (atom [])]
        (-> (js/Promise.all #js [(server! fx/server-pem fx/server-key-pem false)
                                 (server! fx/other-pem fx/other-key-pem false)
                                 (server! fx/server-pem fx/server-key-pem true)])
            (.then
             (fn [[good other mtls]]
+              (reset! servers [good other mtls])
               (let [anchors {:anchors-pem fx/ca-pem}]
                 (-> (js/Promise.all
                      #js [(echo! {:host "localhost" :port (:port good) :timeout-ms 5000 :trust anchors})
@@ -83,4 +85,6 @@
                          (testing "protocols are applied"
                            (is (= "TLSv1.2" (:protocol (nth tls12 2))))))))))))
            (.catch (fn [e] (is (nil? e) "the loopback servers did not start")))
-           (.finally (fn [] (done)))))))
+           (.finally (fn []
+                       (doseq [server @servers] ((:close server)))
+                       (done))))))))
